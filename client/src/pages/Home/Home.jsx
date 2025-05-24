@@ -1,11 +1,11 @@
-
+import AllVendors from "../AllVendors/AllVendors";
 
 const Home = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <AllVendors />
+    </div>
+  );
 };
 
 export default Home;
