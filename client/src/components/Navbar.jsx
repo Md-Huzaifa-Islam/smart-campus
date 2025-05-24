@@ -1,4 +1,3 @@
-
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Tooltip } from "react-tooltip";
@@ -44,6 +43,36 @@ const Navbar = () => {
       >
         <li>All Vendors</li>
       </NavLink>
+      {
+        user?.role === "vendor" && (
+          <>
+            <NavLink
+              className={({ isActive }) =>
+                `btn mr-3 ${
+                  isActive
+                    ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
+                    : "transition"
+                }`
+              }
+              to="/addMenu"
+            >
+              <li>Add Menu</li>
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                `btn mr-3 ${
+                  isActive
+                    ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
+                    : "transition"
+                }`
+              }
+              to="/myMenu"
+            >
+              <li>My Menu</li>
+            </NavLink>
+          </>
+        )
+      }
       {user && (
         <>
           <NavLink
@@ -208,16 +237,19 @@ const Navbar = () => {
 
             {/* ✅ Vendor Toggle Button */}
             {user?.role !== "vendor" && (
-              <button
-                onClick={() => setShopOpen(!shopOpen)}
-                className={`btn btn-sm ${
-                  shopOpen
-                    ? "bg-green-500 text-white hover:bg-green-600"
-                    : "bg-red-500 text-white hover:bg-red-600"
-                }`}
-              >
-                {shopOpen ? "Open" : "Closed"}
-              </button>
+              <>
+                <button
+                  onClick={() => setShopOpen(!shopOpen)}
+                  className={`btn btn-sm ${
+                    shopOpen
+                      ? "bg-green-500 text-white hover:bg-green-600"
+                      : "bg-red-500 text-white hover:bg-red-600"
+                  }`}
+                >
+                  {shopOpen ? "Open" : "Closed"}
+                </button>
+                
+              </>
             )}
 
             {/* Avatar */}
