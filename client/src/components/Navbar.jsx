@@ -6,53 +6,61 @@ import { Tooltip } from "react-tooltip";
 import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const { logOut, user } = useAuth();
-  const navigate = useNavigate();
-
-  const links = (
-    <>
-      <NavLink
-        className={({ isActive }) =>
-          `btn mr-3 ${
-            isActive
-              ? " bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-              : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          }`
-        }
-        to="/"
-      >
-        <li>Home</li>
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          `btn mr-3 ${
-            isActive
-              ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-              : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          }`
-        }
-        to="/allmenu"
-      >
-        <li>All Menu</li>
-      </NavLink>
-      {user ? (
+    const { logOut, user } = useAuth();
+    const navigate = useNavigate();
+        
+                            
+                            
+                                
+                        
+    const links = (
         <>
-          <NavLink
-            className={({ isActive }) =>
-              `btn mr-3 ${
-                isActive
-                  ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-                  : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-              }`
-            }
-            to="/dashboard"
-          >
-            <li>Dashboard</li>
-          </NavLink>
-        </>
-      ) : null}
+            <NavLink
+                className={({ isActive }) =>
+                    `btn mr-3 ${
+                        isActive
+                            ? " bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                            : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    }`
+                }
+                to='/'
+            >
+                <li>Home</li>
+            </NavLink>
+            <NavLink
+                className={({ isActive }) =>
+                    `btn mr-3 ${
+                        isActive
+                            ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                            : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    }`
+                }
+                to='/allVendors'
+            >
+                <li>All Vendors</li>
+            </NavLink>
+            {user ? (
+    <>
+        
+        
+        <NavLink
+                className={({ isActive }) =>
+                    `btn mr-3 ${
+                        isActive
+                            ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                            : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    }`
+                }
+                to='/dashboard'
+            >
+                <li>Dashboard</li>
+            </NavLink>
+        
     </>
-  );
+) : null}
+    
+        </>
+    );
 
   const handleSignout = () => {
     logOut()

@@ -1,5 +1,6 @@
 import React from "react";
 import VendorCard from "./VendorCard";
+import { Link } from "react-router-dom";
 
 export default function AllVendors() {
   return (
@@ -14,6 +15,9 @@ export default function AllVendors() {
         </p>
         <VendorCard />
       </div>
+      <Link to="/allVendors" className="btn btn-primary btn-block mt-8">
+        See More
+      </Link>
     </div>
   );
 }
