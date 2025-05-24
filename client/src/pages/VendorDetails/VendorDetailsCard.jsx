@@ -111,7 +111,7 @@ export default function VendorDetailsCard() {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {menu.length > 0 &&
-          menu.map((item) => <MenuCard key={item._id} item={item} />)}
+          menu.map((item) => <MenuCard key={item._id} items={item} />)}
         {menu.length === 0 && (
           <p className="col-span-3 text-center text-gray-500">
             No menu items available for this vendor.

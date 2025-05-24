@@ -73,42 +73,33 @@ const Navbar = () => {
       )}
       {user && (
         <>
-          <NavLink
-            className={({ isActive }) =>
-              `btn mr-3 ${
-                isActive
-                  ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
-                  : "transition"
-              }`
-            }
-            to="/myOrders"
-          >
-            <li>My Orders</li>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `btn mr-3 ${
-                isActive
-                  ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
-                  : "transition"
-              }`
-            }
-            to="/orders"
-          >
-            <li>Orders</li>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              `btn mr-3 ${
-                isActive
-                  ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
-                  : "transition"
-              }`
-            }
-            to="/dashboard"
-          >
-            <li>Dashboard</li>
-          </NavLink>
+          {user.role !== "vendor" ? (
+            <NavLink
+              className={({ isActive }) =>
+                `btn mr-3 ${
+                  isActive
+                    ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
+                    : "transition"
+                }`
+              }
+              to="/myOrders"
+            >
+              <li>My Orders</li>
+            </NavLink>
+          ) : (
+            <NavLink
+              className={({ isActive }) =>
+                `btn mr-3 ${
+                  isActive
+                    ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
+                    : "transition"
+                }`
+              }
+              to="/orders"
+            >
+              <li>Orders</li>
+            </NavLink>
+          )}
         </>
       )}
     </>
