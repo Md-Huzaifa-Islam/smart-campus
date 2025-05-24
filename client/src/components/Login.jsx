@@ -1,13 +1,53 @@
 import React from "react";
+import useAuth from "../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export default function Login() {
+  const { signIn, setUser, signInWithGoogle } = useAuth();
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // Call signIn function from useAuth
+    signIn(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setUser(user);
+        console.log("User signed in:", user);
+      })
+      .catch((error) => {
+        console.error("Error signing in:", error);
+      });
+  };
+
+  const handleLoginWithGoogle = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        // ...
+      });
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
       <div className="w-full max-w-md bg-base-100 rounded-xl shadow-2xl p-8">
         <h2 className="text-3xl font-bold text-center mb-6">
           Login to Your Account
         </h2>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="label" htmlFor="email">
               Email
@@ -37,6 +77,7 @@ export default function Login() {
           <div className="divider">or</div>
           <button
             type="button"
+            onClick={handleLoginWithGoogle}
             className="btn btn-outline btn-primary w-full flex items-center gap-2"
           >
             <svg
@@ -69,9 +110,9 @@ export default function Login() {
         </form>
         <p className="text-center mt-6 text-sm">
           Don't have an account?{" "}
-          <a href="#" className="link link-primary">
+          <Link to={"/auth/signup"} className="link link-primary">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

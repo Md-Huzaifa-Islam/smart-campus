@@ -1,17 +1,15 @@
 import { Outlet } from "react-router-dom";
-
-
+import Navbar from "../components/Navbar";
 
 const MainLayout = () => {
-    return (
-        <div>
-            {/* <Navbar></Navbar> */}
-            <div className="pt-24 min-h-[calc(100vh-68px)]">
-                <Outlet></Outlet>
-            </div>
-            {/* <Footer></Footer> */}
-        </div>
-    );
+  return (
+    <div>
+      <Navbar></Navbar>
+
+      <Outlet></Outlet>
+      {/* <Footer></Footer> */}
+    </div>
+  );
 };
 
 export default MainLayout;
