@@ -49,7 +49,9 @@ const AllMenu = () => {
                     />
                   </figure>
                   <div className="card-body items-center text-center">
-                    <h3 className="card-title text-2xl">{vendor.name}</h3>
+                    <h3 className="card-title text-2xl text-black">
+                      {vendor.name}
+                    </h3>
                     <p className="text-gray-500">{vendor.description}</p>
 
                     <div className="card-actions mt-4">

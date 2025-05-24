@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUp() {
-  const { createUser, signInWithPopup, setUser, user } = useAuth();
+  const { createUser, signInWithGoogle, setUser, user } = useAuth();
   useEffect(() => {
     // Check if user is already logged in
     if (user) {
