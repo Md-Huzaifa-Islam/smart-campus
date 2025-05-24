@@ -43,36 +43,34 @@ const Navbar = () => {
       >
         <li>All Vendors</li>
       </NavLink>
-      {
-        user?.role === "vendor" && (
-          <>
-            <NavLink
-              className={({ isActive }) =>
-                `btn mr-3 ${
-                  isActive
-                    ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
-                    : "transition"
-                }`
-              }
-              to="/addMenu"
-            >
-              <li>Add Menu</li>
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                `btn mr-3 ${
-                  isActive
-                    ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
-                    : "transition"
-                }`
-              }
-              to="/myMenu"
-            >
-              <li>My Menu</li>
-            </NavLink>
-          </>
-        )
-      }
+      {user?.role === "vendor" && (
+        <>
+          <NavLink
+            className={({ isActive }) =>
+              `btn mr-3 ${
+                isActive
+                  ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
+                  : "transition"
+              }`
+            }
+            to="/addMenu"
+          >
+            <li>Add Menu</li>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `btn mr-3 ${
+                isActive
+                  ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
+                  : "transition"
+              }`
+            }
+            to="/myMenu"
+          >
+            <li>My Menu</li>
+          </NavLink>
+        </>
+      )}
       {user && (
         <>
           <NavLink
@@ -177,7 +175,11 @@ const Navbar = () => {
           <>
             {/* Cart Dropdown */}
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
                 <div className="indicator border p-2 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +207,10 @@ const Navbar = () => {
                 <div className="card-body">
                   <div className="mb-2 max-h-32 overflow-y-auto">
                     {cartData.map((item, index) => (
-                      <div key={item.id} className="flex items-center gap-2 mb-1">
+                      <div
+                        key={item.id}
+                        className="flex items-center gap-2 mb-1"
+                      >
                         <span className="text-sm text-black">
                           {index + 1}. {item.name}
                         </span>
@@ -248,12 +253,15 @@ const Navbar = () => {
                 >
                   {shopOpen ? "Open" : "Closed"}
                 </button>
-                
               </>
             )}
 
             {/* Avatar */}
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
               <div className="w-10 rounded-full">
                 <img
                   alt="User avatar"

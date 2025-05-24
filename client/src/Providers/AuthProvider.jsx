@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
           .then((res) => res.json())
           .then((data) => {
             console.log("User data fetched successfully:", data);
-            setUser({ ...currentUser, role: data.role });
+            setUser({ ...currentUser, role: data.role, mongoId: data._id });
           })
           .catch((error) => {
             console.error("Error fetching user data:", error);
