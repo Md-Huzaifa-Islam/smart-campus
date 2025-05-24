@@ -3,6 +3,7 @@
 
 
 
+import VendorCard from '../AllVendors/VendorCard';
 import Card from './Card';
 
 const AllMenu = () => {
@@ -36,16 +37,11 @@ const AllMenu = () => {
                            
                     </div>
                 </div>
+                <VendorCard></VendorCard>
                  
                     <div className=" w-full grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-stretch">
-                        <Card></Card>
-                        <Card></Card>
-                        <Card></Card>
-                        <Card></Card>
-                        <Card></Card>
-                        <Card></Card>
-                        <Card></Card>
-                        <Card></Card>
+                        
+                        
                     </div>
                 
                 <div className="mt-8 flex justify-center space-x-2">
