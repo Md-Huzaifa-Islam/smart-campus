@@ -3,7 +3,7 @@ import VendorCard from "../AllVendors/VendorCard";
 // Example menu data (replace with props or API data)
 const menuItems = [
   {
-    id: 1,
+    _id: 1,
     name: "Veg Burger",
     image:
       "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80",
@@ -22,7 +22,7 @@ export default function MenuCard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {menuItems.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col"
           >
             <img
