@@ -8,6 +8,8 @@ import VendorDetailsCard from "../pages/VendorDetails/VendorDetailsCard";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MenuDetails from "../pages/VendorDetails/MenuDetails";
 import AllMenu from "../pages/AllMenu/AllMenu";
+import MyMenu from "../pages/VendorDetails/MyMenu";
+import AddMenu from "../pages/VendorDetails/AddMenu";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ export const router = createBrowserRouter([
         path: "vendor/:id",
         element: <VendorDetailsCard />,
       },
+      {
+        path:"myMenu",
+        element:<MyMenu></MyMenu>
+      },
+      {
+        path:"addMenu",
+        element:<AddMenu></AddMenu>
+      }
     ],
   },
   {
