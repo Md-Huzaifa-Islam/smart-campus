@@ -8,7 +8,7 @@ const Navbar = () => {
   const { logOut, user } = useAuth();
   const navigate = useNavigate();
   const [shopOpen, setShopOpen] = useState(true);
-
+  // console.log(user.role);
   // Cart data from localStorage
   const cartData = JSON.parse(localStorage.getItem("cart")) || [];
   const totalItems = cartData.reduce((sum, item) => sum + item.quantity, 0);
@@ -24,7 +24,7 @@ const Navbar = () => {
           `btn mr-3 ${
             isActive
               ? "bg-gradient-to-bl to-blue-500 from-purple-500 text-white"
-              : "hover:bg-transparent hover:text-white transition"
+              : ""
           }`
         }
         to="/"
