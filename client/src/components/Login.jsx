@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAuth from "../Hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  const { signIn, setUser, signInWithGoogle } = useAuth();
+  const { signIn, setUser, signInWithGoogle, user } = useAuth();
+  useEffect(() => {
+    // Check if user is already logged in
+    if (user) {
+      // Redirect to home or dashboard if user is already logged in
+      console.log("User is already logged in:", user);
+      window.location.href = "/";
+      // You can use navigate('/dashboard') or similar to redirect
+    } else {
+      console.log("User is not logged in");
+    }
+  }, [user]);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -17,6 +28,7 @@ export default function Login() {
         const user = userCredential.user;
         setUser(user);
         console.log("User signed in:", user);
+        // redirect to '/'
       })
       .catch((error) => {
         console.error("Error signing in:", error);
@@ -42,7 +54,7 @@ export default function Login() {
       });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
+    <div className=" flex items-center justify-center ">
       <div className="w-full max-w-md bg-base-100 rounded-xl shadow-2xl p-8">
         <h2 className="text-3xl font-bold text-center mb-6">
           Login to Your Account

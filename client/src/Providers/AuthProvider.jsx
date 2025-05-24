@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = () => {
     setLoading(true);
+    setUser(null);
     return signOut(auth);
   };
   const updateUserProfile = (name, photo) => {
@@ -47,18 +48,37 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser?.email) {
         setUser(currentUser);
+
+        fetch(
+          `${import.meta.env.VITE_API_URL}/users/email/${currentUser.email}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("User data fetched successfully:", data);
+            setUser({ ...currentUser, role: data.role });
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+
         await axios.post(
           `${import.meta.env.VITE_API_URL}/jwt`,
           {
             email: currentUser?.email,
           },
           { withCredentials: true }
-        )
+        );
       } else {
         setUser(currentUser);
         await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
           withCredentials: true,
-        })
+        });
       }
       setLoading(false);
     });
