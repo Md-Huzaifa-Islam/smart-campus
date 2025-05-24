@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "http://localhost:5173/auth/signup"],
     credentials: true,
   })
 );
@@ -231,6 +231,26 @@ async function run() {
         res.status(500).send({ message: "Failed to add menu", error: err });
       }
     });
+    // Add a new menu item
+    // ...existing code...
+
+    // Delete a menu item by _id
+    app.delete("/menus/:id", async (req, res) => {
+      try {
+        const id = req.params.id;
+        const result = await menuCollection.deleteOne({
+          _id: new ObjectId(id),
+        });
+        if (result.deletedCount === 0) {
+          return res.status(404).send({ message: "Menu item not found" });
+        }
+        res.send({ success: true, deletedCount: result.deletedCount });
+      } catch (err) {
+        res.status(500).send({ message: "Failed to delete menu", error: err });
+      }
+    });
+
+    // ...existing code...
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
