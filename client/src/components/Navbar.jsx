@@ -8,19 +8,41 @@ import useAuth from "../Hooks/useAuth";
 const Navbar = () => {
     const { logOut, user } = useAuth();
     const navigate = useNavigate();
-        
-                            
-                            
-                                
-                        
+
+    const dummyOrders = [
+        {
+            id: 1,
+            name: "Veg Burger",
+            price: 80,
+            quantity: 2,
+            image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=80&q=80",
+        },
+        {
+            id: 2,
+            name: "Cold Coffee",
+            price: 60,
+            quantity: 1,
+            image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=80&q=80",
+        },
+        {
+            id: 3,
+            name: "French Fries",
+            price: 50,
+            quantity: 3,
+            image: "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=80&q=80",
+        },
+    ];
+
+    const totalItems = dummyOrders.reduce((sum, item) => sum + item.quantity, 0);
+    const subtotal = dummyOrders.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
     const links = (
         <>
             <NavLink
                 className={({ isActive }) =>
-                    `btn mr-3 ${
-                        isActive
-                            ? " bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    `btn mr-3 ${isActive
+                        ? " bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                        : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                     }`
                 }
                 to='/'
@@ -29,10 +51,9 @@ const Navbar = () => {
             </NavLink>
             <NavLink
                 className={({ isActive }) =>
-                    `btn mr-3 ${
-                        isActive
-                            ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    `btn mr-3 ${isActive
+                        ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                        : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                     }`
                 }
                 to='/allVendors'
@@ -40,130 +61,164 @@ const Navbar = () => {
                 <li>All Vendors</li>
             </NavLink>
             {user ? (
-    <>
-        
-        
-        <NavLink
-                className={({ isActive }) =>
-                    `btn mr-3 ${
-                        isActive
-                            ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-                    }`
-                }
-                to='/dashboard'
-            >
-                <li>Dashboard</li>
-            </NavLink>
-        
-    </>
-) : null}
-    
+                <>
+
+
+                    <NavLink
+                        className={({ isActive }) =>
+                            `btn mr-3 ${isActive
+                                ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                                : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                            }`
+                        }
+                        to='/dashboard'
+                    >
+                        <li>Dashboard</li>
+                    </NavLink>
+
+                </>
+            ) : null}
+
         </>
     );
 
-  const handleSignout = () => {
-    logOut()
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User signed out successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      })
-      .catch((err) => {
-        //console.log(err.message)
-      });
-  };
+    const handleSignout = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User signed out successfully",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate("/");
+            })
+            .catch((err) => {
+                //console.log(err.message)
+            });
+    };
 
-  return (
-    <div className="navbar bg-base-100 fixed top-0 left-0 w-full z-50 shadow-md dark:bg-gray-900 dark:text-gray-100 transition duration-300">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            {links}
-          </ul>
-        </div>
-        <div className="hidden md:block">
-          <Link
-            onClick={() => navigate("/")}
-            className="btn flex gap-4 btn-ghost text-xl "
-          >
-            {/* <img className="w-12" src={icons} alt="icon" /> */}
-            Smart Campus
-          </Link>
-        </div>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
-      </div>
-      <div className="navbar-end flex items-center">
-        {user ? (
-          <>
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="User avatar"
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content={user?.displayName}
-                  data-tooltip-place="top"
-                  src={user?.photoURL}
-                />
-                <Tooltip id="my-tooltip" />
-              </div>
+    return (
+        <div className="navbar bg-base-100 fixed top-0 left-0 w-full z-50 shadow-md dark:bg-gray-900 dark:text-gray-100 transition duration-300">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h8m-8 6h16"
+                            />
+                        </svg>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                    >
+                        {links}
+                    </ul>
+                </div>
+                <div className="hidden md:block">
+                    <Link
+                        onClick={() => navigate("/")}
+                        className="btn flex gap-4 btn-ghost text-xl "
+                    >
+                        {/* <img className="w-12" src={icons} alt="icon" /> */}
+                        Smart Campus
+                    </Link>
+                </div>
             </div>
-            <button
-              onClick={handleSignout}
-              className="btn btn-sm btn-outline dark:bg-gray-700 dark:text-base-100"
-            >
-              Sign Out
-            </button>
-          </>
-        ) : (
-          <>
-            <NavLink
-              className="btn mr-3 bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-              to="/auth"
-            >
-              Log In
-            </NavLink>
-            <NavLink
-              className="btn mr-3 bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-              to="/auth/signup"
-            >
-              Register
-            </NavLink>
-          </>
-        )}
-      </div>
-    </div>
-  );
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">{links}</ul>
+            </div>
+            <div className="navbar-end flex items-center">
+                {user ? (
+                    <>
+                        <div className="flex-none mr-3">
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                                    <div className="indicator">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /> 
+                                        </svg>
+                                        <span className="badge badge-sm indicator-item">8</span>
+                                    </div>
+                                </div>
+                                <div
+                                    tabIndex={0}
+                                    className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+                                    <div className="card-body">
+                                        <div className="mb-2 max-h-32 overflow-y-auto">
+                                            {dummyOrders.map((item) => (
+                                                <div key={item.id} className="flex items-center gap-2 mb-1">
+                                                    <img src={item.image} alt={item.name} className="w-8 h-8 rounded" />
+                                                    <span className="text-sm">{item.name}</span>
+                                                    <span className="text-xs text-gray-500 ml-auto">x{item.quantity}</span>
+                                                    <span className="text-xs text-green-600 font-semibold ml-2">₹{item.price * item.quantity}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <span className="text-lg font-bold">{totalItems} Items</span>
+                                        <span className="text-info">Subtotal: ₹{subtotal}</span>
+                                        <div className="card-actions flex flex-col gap-2 mt-2">
+                                            
+                                            <button
+                                                className="btn btn-success btn-block"
+                                                onClick={() => navigate("/buy-now")}
+                                            >
+                                                Buy Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="User avatar"
+                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-content={user?.displayName}
+                                    data-tooltip-place="top"
+                                    src={user?.photoURL}
+                                />
+                                <Tooltip id="my-tooltip" />
+                            </div>
+                        </div>
+                        <button
+                            onClick={handleSignout}
+                            className="btn btn-sm btn-outline dark:bg-gray-700 dark:text-base-100"
+                        >
+                            Sign Out
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <NavLink
+                            className="btn mr-3 bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                            to="/auth"
+                        >
+                            Log In
+                        </NavLink>
+                        <NavLink
+                            className="btn mr-3 bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                            to="/auth/signup"
+                        >
+                            Register
+                        </NavLink>
+                    </>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default Navbar;
