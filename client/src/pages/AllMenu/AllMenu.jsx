@@ -51,9 +51,7 @@ const AllMenu = () => {
                   <div className="card-body items-center text-center">
                     <h3 className="card-title text-2xl">{vendor.name}</h3>
                     <p className="text-gray-500">{vendor.description}</p>
-                    <div className="badge badge-primary badge-outline my-2">
-                      {vendor.menu || 0} Products
-                    </div>
+
                     <div className="card-actions mt-4">
                       <Link
                         to={`/vendor/${vendor._id}`}
