@@ -1,13 +1,61 @@
 import React from "react";
+import useAuth from "../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
+  const { createUser, signInWithPopup, setUser } = useAuth();
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const role = form.role.value;
+
+    // Call createUser function from useAuth
+    createUser(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setUser(user);
+        console.log("User created:", user);
+        // You can also update the user's profile with name and role here
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error);
+      });
+  };
+
+  const handleSignUpWithGoogle = () => {
+    signInWithGoogle()
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        setUser(user);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
       <div className="w-full max-w-md bg-base-100 rounded-xl shadow-2xl p-8">
         <h2 className="text-3xl font-bold text-center mb-6">
           Create an Account
         </h2>
-        <form>
+        <form onSubmit={handleSignUp}>
           <div className="mb-4">
             <label className="label" htmlFor="name">
               Name
@@ -58,6 +106,7 @@ export default function SignUp() {
           <div className="divider">or</div>
           <button
             type="button"
+            onClick={handleSignUpWithGoogle}
             className="btn btn-outline btn-primary w-full flex items-center gap-2"
           >
             <svg
@@ -90,9 +139,9 @@ export default function SignUp() {
         </form>
         <p className="text-center mt-6 text-sm">
           Already have an account?{" "}
-          <a href="#" className="link link-primary">
+          <Link to="/auth" className="link link-primary">
             Log in
-          </a>
+          </Link>
         </p>
       </div>
     </div>
