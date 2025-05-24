@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import VendorCard from "../AllVendors/VendorCard";
 
 // Example menu data (replace with props or API data)
@@ -6,55 +5,52 @@ const menuItems = [
   {
     id: 1,
     name: "Veg Burger",
-    price: 80,
-    vendor: "Vendor One",
-    rating: 4.5,
     image:
       "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80",
-  },
-  {
-    id: 2,
-    name: "Cold Coffee",
-    price: 60,
+    quantity: 20,
+    price: 80,
+    details: "A delicious vegetarian burger with fresh veggies and cheese.",
     vendor: "Vendor One",
-    rating: 4.2,
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
   },
-  {
-    id: 3,
-    name: "French Fries",
-    price: 50,
-    vendor: "Vendor One",
-    rating: 4.7,
-    image:
-      "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80",
-  },
+  // Add more items as needed
 ];
 
-
-
 export default function MenuCard() {
-  const [quantities, setQuantities] = useState(
-    menuItems.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
-  );
-
-  const handleQuantityChange = (id, delta) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.max(1, prev[id] + delta),
-    }));
-  };
-
-  
-
   return (
     <div className="max-w-4xl mx-auto py-10">
       <h2 className="text-3xl font-bold text-center mb-8 text-primary">
         Vendor Menu
       </h2>
-      <div className="">
-        <MenuCard />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {menuItems.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-5 flex-1 flex flex-col">
+              <h3 className="text-xl font-bold mb-2 text-blue-700">
+                {item.name}
+              </h3>
+              <p className="text-gray-600 mb-2">{item.details}</p>
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-semibold text-green-600">
+                  ₹{item.price}
+                </span>
+                <span className="text-sm text-gray-500">
+                  Qty: {item.quantity}
+                </span>
+              </div>
+              <button className="mt-auto btn btn-primary w-full">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
