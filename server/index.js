@@ -48,6 +48,7 @@ async function run() {
     await client.connect();
     const usersCollection = client.db('campusDB').collection('users');
     
+    
     //Auth related api
     app.post('/jwt', (req, res) => {
       const user = req.body;
