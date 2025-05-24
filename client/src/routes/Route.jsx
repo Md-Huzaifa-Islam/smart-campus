@@ -11,6 +11,8 @@ import AllMenu from "../pages/AllMenu/AllMenu";
 import MyMenu from "../pages/VendorDetails/MyMenu";
 import AddMenu from "../pages/VendorDetails/AddMenu";
 import EditMenu from "../pages/VendorDetails/EditMenu";
+import MyOrders from "../components/MyOrders";
+import Orders from "../pages/VendorDetails/Orders";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path:"/editMenu",
         element:<EditMenu></EditMenu>
+      },
+      {
+        path:"/myOrders",
+        element:<MyOrders></MyOrders>
+      },
+      {
+        path:"/orders",
+        element:<Orders></Orders>
       }
     ],
   },

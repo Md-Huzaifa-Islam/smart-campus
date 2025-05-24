@@ -50,24 +50,36 @@ const Navbar = () => {
               `btn mr-3 ${
                 isActive
                   ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-                  : " transition"
+                  : "  transition"
               }`
             }
-            to="/myMenu"
+            to="/myOrders"
           >
-            <li>My Menu</li>
+            <li>My Orders</li>
           </NavLink>
           <NavLink
             className={({ isActive }) =>
               `btn mr-3 ${
                 isActive
                   ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
-                  : " transition"
+                  : "  transition"
               }`
             }
-            to="/addMenu"
+            to="/orders"
           >
-            <li>Add Menu</li>
+            <li>Orders</li>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `btn mr-3 ${
+                isActive
+                  ? "bg-gradient-to-bl to-blue-500  from-purple-500 text-white"
+                  : "  transition"
+              }`
+            }
+            to="/dashboard"
+          >
+            <li>Dashboard</li>
           </NavLink>
         </>
       )}
