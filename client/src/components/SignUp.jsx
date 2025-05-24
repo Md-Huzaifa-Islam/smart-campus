@@ -33,6 +33,9 @@ export default function SignUp() {
           name,
           role,
         };
+        if (role === "vendor") {
+          payLoad.menu = 0;
+        }
         // await axios.post(`${import.meta.env.VITE_API_URL}/users`, payLoad);
         fetch(`${import.meta.env.VITE_API_URL}/users`, {
           method: "POST",
