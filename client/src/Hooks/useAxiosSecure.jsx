@@ -22,8 +22,8 @@ const useAxiosSecure = () => {
           // logout
           logOut()
           // navigate to login
-          navigate('/login')
-          console.log('hello')
+          navigate('/auth')
+          
         }
         return Promise.reject(error)
       }

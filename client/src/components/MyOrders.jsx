@@ -1,5 +1,5 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useAuth from "../Hooks/useAuth";
 
 const dummyOrders = [
   { id: 1, name: "Spaghetti Bolognese", price: "$12.99", status: "Pending" },
@@ -15,10 +15,31 @@ const statusColor = {
 };
 
 const MyOrders = () => {
+  const { user } = useAuth();
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    if (!user) {
+      console.error("User is not logged in, cannot fetch orders.");
+      setOrders([]); // Fallback to dummyOrders if user is not logged in
+      return;
+    }
+    fetch(`${import.meta.env.VITE_API_URL}/orders/buyer/${user.mongoId}`) // Replace with your API endpoint
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched orders:", data);
+        setOrders(data.length > 0 ? data : dummyOrders); // Use dummyOrders if no data
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setOrders(dummyOrders); // Fallback to dummyOrders if fetch fails
+      });
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-slate-100 px-4 py-10">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-xl p-6">
-        <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center">My Orders</h2>
+        <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center">
+          My Orders
+        </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto">
             <thead>
@@ -29,13 +50,18 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody className="text-gray-700">
-              {dummyOrders.map((order) => (
-                <tr key={order.id} className="border-t hover:bg-blue-50 transition">
+              {orders.map((order) => (
+                <tr
+                  key={order._id}
+                  className="border-t hover:bg-blue-50 transition"
+                >
                   <td className="px-6 py-4">{order.name}</td>
                   <td className="px-6 py-4">{order.price}</td>
                   <td className="px-6 py-4">
                     <span
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${statusColor[order.status]}`}
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        statusColor[order.status]
+                      }`}
                     >
                       {order.status}
                     </span>

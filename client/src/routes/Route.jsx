@@ -13,6 +13,7 @@ import AddMenu from "../pages/VendorDetails/AddMenu";
 import EditMenu from "../pages/VendorDetails/EditMenu";
 import MyOrders from "../components/MyOrders";
 import Orders from "../pages/VendorDetails/Orders";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -30,27 +31,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "vendor/:id",
-        element: <VendorDetailsCard />,
+        element:<PrivateRoute><VendorDetailsCard /></PrivateRoute> ,
       },
       {
         path:"/myMenu",
-        element:<MyMenu></MyMenu>
+        element:<PrivateRoute><MyMenu></MyMenu></PrivateRoute>  
       },
       {
         path:"/addMenu",
-        element:<AddMenu></AddMenu>
+        element:<PrivateRoute><AddMenu></AddMenu></PrivateRoute>  
       },
       {
         path:"/editMenu",
-        element:<EditMenu></EditMenu>
+        element:<PrivateRoute><EditMenu></EditMenu></PrivateRoute>  
       },
       {
         path:"/myOrders",
-        element:<MyOrders></MyOrders>
+        element:<PrivateRoute><MyOrders></MyOrders></PrivateRoute>  
       },
       {
         path:"/orders",
-        element:<Orders></Orders>
+        element:  <PrivateRoute><Orders></Orders></PrivateRoute>  
       }
     ],
   },
