@@ -32,6 +32,8 @@ const menuItems = [
   },
 ];
 
+
+
 export default function MenuCard() {
   const [quantities, setQuantities] = useState(
     menuItems.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
@@ -43,6 +45,8 @@ export default function MenuCard() {
       [id]: Math.max(1, prev[id] + delta),
     }));
   };
+
+  
 
   return (
     <div className="max-w-4xl mx-auto py-10">

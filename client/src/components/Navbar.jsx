@@ -7,7 +7,7 @@ import { Tooltip } from 'react-tooltip';
 import useAuth from '../Hooks/useAuth';
 
 const Navbar = () => {
-    const { signOutUser, user } = useAuth();
+    const { logOut, user } = useAuth();
     const navigate = useNavigate();
         
                             
@@ -64,7 +64,7 @@ const Navbar = () => {
     );
 
     const handleSignout = () => {
-        signOutUser()
+        logOut()
             .then(() => {
                 Swal.fire({
                     position: "top-end",
