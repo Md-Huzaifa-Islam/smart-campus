@@ -10,6 +10,7 @@ import MenuDetails from "../pages/VendorDetails/MenuDetails";
 import AllMenu from "../pages/AllMenu/AllMenu";
 import MyMenu from "../pages/VendorDetails/MyMenu";
 import AddMenu from "../pages/VendorDetails/AddMenu";
+import EditMenu from "../pages/VendorDetails/EditMenu";
 
 export const router = createBrowserRouter([
   {
@@ -30,12 +31,16 @@ export const router = createBrowserRouter([
         element: <VendorDetailsCard />,
       },
       {
-        path:"myMenu",
+        path:"/myMenu",
         element:<MyMenu></MyMenu>
       },
       {
-        path:"addMenu",
+        path:"/addMenu",
         element:<AddMenu></AddMenu>
+      },
+      {
+        path:"/editMenu",
+        element:<EditMenu></EditMenu>
       }
     ],
   },
