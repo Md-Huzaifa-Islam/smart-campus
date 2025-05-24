@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 
-const dummyOrders = [
-  { id: 1, name: "Spaghetti Bolognese", price: "$12.99", status: "Pending" },
-  { id: 2, name: "Caesar Salad", price: "$9.50", status: "Preparing" },
-  { id: 3, name: "Margherita Pizza", price: "$8.99", status: "Ready" },
-  { id: 4, name: "Sushi Platter", price: "$15.25", status: "Pending" },
-];
-
 const statusColor = {
   Pending: "text-yellow-600 bg-yellow-100",
   Preparing: "text-blue-600 bg-blue-100",
@@ -27,11 +20,11 @@ const MyOrders = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched orders:", data);
-        setOrders(data.length > 0 ? data : dummyOrders); // Use dummyOrders if no data
+        setOrders(data.length > 0 ? data : []); // Use dummyOrders if no data
       })
       .catch((error) => {
         console.error("Error fetching orders:", error);
-        setOrders(dummyOrders); // Fallback to dummyOrders if fetch fails
+        setOrders([]); // Fallback to dummyOrders if fetch fails
       });
   }, []);
   return (

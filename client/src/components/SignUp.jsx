@@ -5,7 +5,7 @@ import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 
 export default function SignUp() {
-  const { createUser, signInWithPopup, setUser, user } = useAuth();
+  const { createUser, signInWithGoogle, setUser, user } = useAuth();
   useEffect(() => {
     // Check if user is already logged in
     if (user) {

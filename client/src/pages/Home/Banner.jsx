@@ -7,11 +7,11 @@ const foodImages = [
     legend: "Delicious Burger",
   },
   {
-    url: "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=800&q=80",
-    legend: "Fresh Salad",
+    url: "https://i.ibb.co/k6zrVjG0/rachel-park-hrlvr2-Zl-UNk-unsplash.jpg",
+    legend: "Fresh",
   },
   {
-    url: "https://images.unsplash.com/photo-1516685018646-5499d0a7d42f?auto=format&fit=crop&w=800&q=80",
+    url: "https://i.ibb.co/cS3qGgZ3/alan-hardman-SU1-LFoe-EUkk-unsplash.jpg",
     legend: "Tasty Pizza",
   },
 ];

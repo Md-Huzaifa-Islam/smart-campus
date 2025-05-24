@@ -1,12 +1,28 @@
 import VendorCard from "../AllVendors/VendorCard";
 
 export default function MenuCard({ items }) {
+  // item of cart will be added to local storage
+  const addToCart = (item) => {
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItemIndex = cartData.findIndex((i) => i._id === item._id);
+
+    if (existingItemIndex > -1) {
+      // If item already exists, increase quantity
+      cartData[existingItemIndex].quantity += 1;
+    } else {
+      // If item doesn't exist, add it with quantity 1
+      cartData.push({ ...item, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cartData));
+    alert(`${item.name} added to cart!`);
+  };
   return (
     <div className="max-w-4xl mx-auto py-10">
       <div className=" gap-8">
         <div
           key={items._id}
-          className="bg-white rounded-xl shadow-lg overflow-hidden"
+          className="bg-white w-60 rounded-xl shadow-lg overflow-hidden"
         >
           <img
             src={items.image}
@@ -22,7 +38,10 @@ export default function MenuCard({ items }) {
                 ₹{items.price}
               </span>
             </div>
-            <button className="mt-auto btn btn-primary w-full">
+            <button
+              onClick={() => addToCart(items)}
+              className="mt-auto btn btn-primary w-full"
+            >
               Add to Cart
             </button>
           </div>
