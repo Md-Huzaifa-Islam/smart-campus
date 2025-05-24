@@ -23,10 +23,10 @@ export const router = createBrowserRouter([
         path:"/allVendors",
         element:<AllMenu></AllMenu>
       },
-      // {
-      //   path: "vendor/:id",
-      //   element: <VendorDetailsCard />,
-      // },
+      {
+        path: "vendor/:id",
+        element: <VendorDetailsCard />,
+      },
     ],
   },
   {
