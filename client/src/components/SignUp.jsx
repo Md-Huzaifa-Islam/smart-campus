@@ -1,24 +1,56 @@
 import React from "react";
 import useAuth from "../Hooks/useAuth";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function SignUp() {
-  const { createUser, signInWithPopup, setUser } = useAuth();
-  const handleSignUp = (event) => {
+  const { createUser, signInWithPopup, setUser, user } = useAuth();
+  useEffect(() => {
+    // Check if user is already logged in
+    if (user) {
+      // Redirect to home or dashboard if user is already logged in
+      console.log("User is already logged in:", user);
+      window.location.href = "/";
+      // You can use navigate('/dashboard') or similar to redirect
+    } else {
+      console.log("User is not logged in");
+    }
+  }, [user]);
+  const handleSignUp = async (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
     const role = form.role.value;
-
     // Call createUser function from useAuth
     createUser(email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
+        const payLoad = {
+          email,
+          name,
+          role,
+        };
+        // await axios.post(`${import.meta.env.VITE_API_URL}/users`, payLoad);
+        fetch(`${import.meta.env.VITE_API_URL}/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payLoad),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("User created successfully:", data);
+          })
+          .catch((error) => {
+            console.error("Error creating user:", error);
+          });
         setUser(user);
-        console.log("User created:", user);
+        console.log(user);
+
         // You can also update the user's profile with name and role here
       })
       .catch((error) => {
@@ -89,18 +121,28 @@ export default function SignUp() {
               placeholder="Password"
             />
           </div>
-          <div className="mb-4">
-            <label className="label">Sign up as</label>
-            <div className="flex gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="role" className="radio" />
-                <span>Student</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="radio" name="role" className="radio" />
-                <span>Vendor</span>
-              </label>
-            </div>
+          <div className="flex gap-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="student"
+                className="radio"
+                required
+                defaultChecked // Student is selected by default
+              />
+              <span>Student</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="vendor"
+                className="radio"
+                required
+              />
+              <span>Vendor</span>
+            </label>
           </div>
           <button className="btn btn-neutral w-full mt-2">Sign Up</button>
           <div className="divider">or</div>
