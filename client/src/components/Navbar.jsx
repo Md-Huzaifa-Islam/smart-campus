@@ -36,9 +36,9 @@ const Navbar = () => {
                             : "hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                     }`
                 }
-                to='/allmenu'
+                to='/allVendors'
             >
-                <li>All Menu</li>
+                <li>All Vendors</li>
             </NavLink>
             {user ? (
     <>

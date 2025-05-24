@@ -7,6 +7,7 @@ import Home from "../pages/Home/Home";
 import VendorDetailsCard from "../pages/VendorDetails/VendorDetailsCard";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MenuDetails from "../pages/VendorDetails/MenuDetails";
+import AllMenu from "../pages/AllMenu/AllMenu";
 
 export const router = createBrowserRouter([
   {
@@ -19,9 +20,13 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "vendor/:id",
-        element: <VendorDetailsCard />,
+        path:"/allVendors",
+        element:<AllMenu></AllMenu>
       },
+      // {
+      //   path: "vendor/:id",
+      //   element: <VendorDetailsCard />,
+      // },
     ],
   },
   {

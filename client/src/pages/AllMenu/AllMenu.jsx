@@ -19,7 +19,7 @@ const AllMenu = () => {
             
             <div className="container mx-auto px-4">
                 <h1 className="text-4xl font-extrabold text-center text-[#544efcba] mb-10">
-                    All Menu
+                    All Vendors
                 </h1>
                 <div className="flex justify-between items-center mb-10">
                     <div className='flex gap-6 justify-between items-center flex-col md:flex-row'>
