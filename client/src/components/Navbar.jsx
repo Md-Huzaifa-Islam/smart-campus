@@ -9,23 +9,6 @@ const Navbar = () => {
   const { logOut, user } = useAuth();
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    logOut()
-      .then(() => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User signed out successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      })
-      .catch((err) => {
-        //console.log(err.message)
-      });
-  };
-
   const links = (
     <>
       <NavLink
@@ -81,7 +64,6 @@ const Navbar = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-
         navigate("/");
       })
       .catch((err) => {
