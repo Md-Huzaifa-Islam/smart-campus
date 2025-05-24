@@ -76,9 +76,23 @@ async function run() {
     })
 
     
+    // user related api
+    app.get('/users', verifyToken, async (req, res) => {
+      const users = await usersCollection.find().toArray();
+      res.send(users)
+    })
     
-    
-    
+    app.post('/users', async (req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result)
+    })
+    app.get('/users/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) }
+      const user = await usersCollection.findOne(query);
+      res.send(user)
+    })
     
 
     // Send a ping to confirm a successful connection
